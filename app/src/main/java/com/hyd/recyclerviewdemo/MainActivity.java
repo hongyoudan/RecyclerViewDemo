@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
         // 5.准备数据
         initDate();
 
+        // 29.设置默认显示的效果
+        showList(true, false);
+
     }
 
     // 6.initDate方法用于初始化模拟数据
@@ -55,16 +58,16 @@ public class MainActivity extends AppCompatActivity {
             mData.add(data);
         }
 
-        // 27.设置RecyclerView布局管理器（设置样式）
-        LinearLayoutManager layoutManager= new LinearLayoutManager(this);
-        mList.setLayoutManager(layoutManager);
-
-        // 14.创建适配器 adapter.ListViewAdapter
-        // 25.适配器创建好后回来
-        ListViewAdapter adapter=new ListViewAdapter(mData);
-
-        // 26.设置Adapter到RecyclerView里
-        mList.setAdapter(adapter);
+//        // 27.设置RecyclerView布局管理器（设置样式）
+//        LinearLayoutManager layoutManager= new LinearLayoutManager(this);
+//        mList.setLayoutManager(layoutManager);
+//
+//        // 14.创建适配器 adapter.ListViewAdapter
+//        // 25.适配器创建好后回来
+//        ListViewAdapter adapter=new ListViewAdapter(mData);
+//
+//        // 26.设置Adapter到RecyclerView里
+//        mList.setAdapter(adapter);
 
 
     }
@@ -88,12 +91,19 @@ public class MainActivity extends AppCompatActivity {
              * ListView效果
              */
             case R.id.list_view_vertical_stander:
+                // 27.创建showList方法，当点击子菜单选项时更换样式
+                // 33.回到这里，将前面设置好的参数传进去
+                // TODO: 2021/8/13 6 09:05
+                showList(true, false);
                 break;
             case R.id.list_view_vertical_reverse:
+                showList(true, true);
                 break;
             case R.id.list_view_horizontal_stander:
+                showList(false, false);
                 break;
             case R.id.list_view_horizontal_reverse:
+                showList(false, true);
                 break;
             /**
              * GridView效果
@@ -120,5 +130,30 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // 28.将前面准备数据部分的代码抽离并合并到这个方法里
+    // 32.因此我们在showList里加入两个参数来控制
+    private void showList(boolean isVertical, boolean isReverse) {
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+
+        // 30.通过设置布局管理器的setOrientation方法，来设置水平还是垂直显示
+        // 按住command点击setOrientation查看其源码：
+        ///**
+        //* Sets the orientation of the layout. {@link LinearLayoutManager}
+        //* will do its best to keep scroll position.
+        //*
+        //* @param orientation {@link #HORIZONTAL} or {@link #VERTICAL}
+        //*/
+        // 它是可以通过HORIZONTAL和VERTICAL参数来控制水平还是垂直显示
+        layoutManager.setOrientation(isVertical ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL);
+
+        // 31.设置正向或者反向显示
+        layoutManager.setReverseLayout(isReverse);
+
+        mList.setLayoutManager(layoutManager);
+        ListViewAdapter adapter = new ListViewAdapter(mData);
+        mList.setAdapter(adapter);
     }
 }

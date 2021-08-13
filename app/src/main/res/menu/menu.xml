@@ -6,7 +6,7 @@
         <menu>
             <item
                 android:id="@+id/list_view_vertical_stander"
-                android:title="垂直标准" />
+                android:title="垂直标准（默认）" />
 
             <item
                 android:id="@+id/list_view_vertical_reverse"
