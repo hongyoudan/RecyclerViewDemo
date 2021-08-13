@@ -14,18 +14,18 @@
         tools:layout_editor_absoluteY="1dp">
 
         <ImageView
-            android:id="@+id/list_view_icon"
+            android:id="@+id/icon"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:scaleType="fitXY"
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/list_view_title"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@id/list_view_icon"
+            android:layout_toRightOf="@id/icon"
             android:gravity="center|left"
             android:text="标题" />
     </RelativeLayout>
