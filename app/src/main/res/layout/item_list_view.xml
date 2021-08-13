@@ -22,11 +22,11 @@
 
         <TextView
             android:id="@+id/list_view_title"
-            android:gravity="center|left"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_marginLeft="5dp"
             android:layout_toRightOf="@id/list_view_icon"
+            android:gravity="center|left"
             android:text="标题" />
     </RelativeLayout>
 

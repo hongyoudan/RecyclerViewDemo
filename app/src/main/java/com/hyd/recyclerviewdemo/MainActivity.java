@@ -2,6 +2,7 @@ package com.hyd.recyclerviewdemo;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,12 +11,16 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.hyd.recyclerviewdemo.adapter.GridViewAdapter;
 import com.hyd.recyclerviewdemo.adapter.ListViewAdapter;
 import com.hyd.recyclerviewdemo.bean.Datas;
 import com.hyd.recyclerviewdemo.bean.ItemBean;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.widget.GridLayout.VERTICAL;
+import static android.widget.LinearLayout.HORIZONTAL;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -93,7 +98,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.list_view_vertical_stander:
                 // 27.创建showList方法，当点击子菜单选项时更换样式
                 // 33.回到这里，将前面设置好的参数传进去
-                // TODO: 2021/8/13 6 09:05
                 showList(true, false);
                 break;
             case R.id.list_view_vertical_reverse:
@@ -109,12 +113,18 @@ public class MainActivity extends AppCompatActivity {
              * GridView效果
              */
             case R.id.grid_view_vertical_stander:
+                // 34.同理，创建showGrid方法
+                // 40.创建完成后回来传入参数
+                showGrid(true,false);
                 break;
             case R.id.grid_view_vertical_reverse:
+                showGrid(true,true);
                 break;
             case R.id.grid_view_horizontal_stander:
+                showGrid(false,false);
                 break;
             case R.id.grid_view_horizontal_reverse:
+                showGrid(false,true);
                 break;
             /**
              * 瀑布流效果
@@ -130,6 +140,24 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    // 37.同理，设置参数
+    private void showGrid(boolean isVertical, boolean isReverse) {
+        // 35.同理，创建布局管理器
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
+
+        // 36.同理，设置水平或垂直，正向或反向显示
+        layoutManager.setOrientation(isVertical ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL);
+        layoutManager.setReverseLayout(isReverse);
+
+        mList.setLayoutManager(layoutManager);
+
+        // 38.设置适配器，创建adapter.GridViewAdapter，创建步骤与前面所讲一样
+        // 39.创建完成后回来设置
+        GridViewAdapter adapter = new GridViewAdapter(mData);
+        mList.setAdapter(adapter);
+
     }
 
     // 28.将前面准备数据部分的代码抽离并合并到这个方法里
