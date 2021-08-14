@@ -47,9 +47,9 @@ public class MainActivity extends AppCompatActivity {
         // 29.设置默认显示的效果
         showList(true, false);
 
-        // 66.因为RecyclerView没有像ListView有item点击事件的方法，
-        // 因此我们要自己创建一个监听条目点击的方法
-        initListener();
+//        // 66.因为RecyclerView没有像ListView有item点击事件的方法，
+//        // 因此我们要自己创建一个监听条目点击的方法
+//        initListener();
 
     }
 
@@ -190,6 +190,9 @@ public class MainActivity extends AppCompatActivity {
         // 64.设置适配器
         mList.setAdapter(this.mAdapter);
 
+        // 81.解决了点击GridView和瀑布流的item无法触发点击事件的问题
+        initListener();
+
     }
 
     // 37.同理，设置参数
@@ -208,6 +211,9 @@ public class MainActivity extends AppCompatActivity {
         // 69.将adapter提取成全局变量，类型是父类RecyclerViewBaseAdapter
         mAdapter = new GridViewAdapter(mData);
         mList.setAdapter(this.mAdapter);
+
+        // 81.解决了点击GridView和瀑布流的item无法触发点击事件的问题
+        initListener();
 
     }
 
@@ -236,5 +242,8 @@ public class MainActivity extends AppCompatActivity {
         // 68.将adapter提取成全局变量，类型是父类RecyclerViewBaseAdapter
         mAdapter = new ListViewAdapter(mData);
         mList.setAdapter(mAdapter);
+
+        // 81.解决了点击GridView和瀑布流的item无法触发点击事件的问题
+        initListener();
     }
 }
