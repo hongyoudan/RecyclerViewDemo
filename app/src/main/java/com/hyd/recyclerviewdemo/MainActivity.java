@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -166,6 +167,14 @@ public class MainActivity extends AppCompatActivity {
                 break;
             case R.id.stagger_view_horizontal_reverse:
                 showStagger(false, true);
+                break;
+            /**
+             * 多种类型的条目
+             */
+            // 82.创建多种类型的条目menu，MoreTypeActivity并实现跳转
+            case R.id.more_type:
+                Intent intent = new Intent(MainActivity.this, MoreTypeActivity.class);
+                startActivity(intent);
                 break;
 
         }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- ListView效果 -->
     <item
         android:id="@+id/list_view"
         android:title="ListView效果">
@@ -21,6 +22,7 @@
                 android:title="水平反向" />
         </menu>
     </item>
+    <!-- GridView效果 -->
     <item
         android:id="@+id/grid_view"
         android:title="GridView效果">
@@ -42,6 +44,7 @@
                 android:title="水平反向" />
         </menu>
     </item>
+    <!-- 瀑布流效果 -->
     <item
         android:id="@+id/stagger_view"
         android:title="瀑布流效果">
@@ -63,5 +66,9 @@
                 android:title="水平反向" />
         </menu>
     </item>
+    <!-- 多种类型的条目 -->
+    <item
+        android:id="@+id/more_type"
+        android:title="多种类型的条目" />
 
 </menu>
