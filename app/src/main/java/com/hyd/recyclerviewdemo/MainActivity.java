@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 
 import com.hyd.recyclerviewdemo.adapter.GridViewAdapter;
 import com.hyd.recyclerviewdemo.adapter.ListViewAdapter;
+import com.hyd.recyclerviewdemo.adapter.StaggerAdapter;
 import com.hyd.recyclerviewdemo.bean.Datas;
 import com.hyd.recyclerviewdemo.bean.ItemBean;
 
@@ -115,31 +117,55 @@ public class MainActivity extends AppCompatActivity {
             case R.id.grid_view_vertical_stander:
                 // 34.同理，创建showGrid方法
                 // 40.创建完成后回来传入参数
-                showGrid(true,false);
+                showGrid(true, false);
                 break;
             case R.id.grid_view_vertical_reverse:
-                showGrid(true,true);
+                showGrid(true, true);
                 break;
             case R.id.grid_view_horizontal_stander:
-                showGrid(false,false);
+                showGrid(false, false);
                 break;
             case R.id.grid_view_horizontal_reverse:
-                showGrid(false,true);
+                showGrid(false, true);
                 break;
             /**
              * 瀑布流效果
              */
             case R.id.stagger_view_vertical_stander:
+                // 55.同理，创建showStagger方法
+                // 65.创建完成后回来传入参数
+                showStagger(true, false);
                 break;
             case R.id.stagger_view_vertical_reverse:
+                showStagger(true, true);
                 break;
             case R.id.stagger_view_horizontal_stander:
+                showStagger(false, false);
                 break;
             case R.id.stagger_view_horizontal_reverse:
+                showStagger(false, true);
                 break;
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showStagger(boolean isVertical, boolean isReverse) {
+        // 56.同理，准备布局管理器
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, isVertical ? StaggeredGridLayoutManager.VERTICAL : StaggeredGridLayoutManager.HORIZONTAL);
+
+        // 57.设置布局管理器方向
+        layoutManager.setReverseLayout(isReverse);
+
+        // 58.设置布局管理器到RecyclerView里
+        mList.setLayoutManager(layoutManager);
+
+        // 59.创建适配器 adapter.StaggerAdapter
+        // 63.创建完成后回来
+        StaggerAdapter adapter = new StaggerAdapter(mData);
+
+        // 64.设置适配器
+        mList.setAdapter(adapter);
     }
 
     // 37.同理，设置参数
@@ -148,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
         GridLayoutManager layoutManager = new GridLayoutManager(this, 3);
 
         // 36.同理，设置水平或垂直，正向或反向显示
-        layoutManager.setOrientation(isVertical ? RecyclerView.VERTICAL : RecyclerView.HORIZONTAL);
+        layoutManager.setOrientation(isVertical ? GridLayoutManager.VERTICAL : GridLayoutManager.HORIZONTAL);
         layoutManager.setReverseLayout(isReverse);
 
         mList.setLayoutManager(layoutManager);
