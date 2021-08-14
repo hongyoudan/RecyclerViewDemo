@@ -6,13 +6,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import com.hyd.recyclerviewdemo.adapter.GridViewAdapter;
@@ -25,15 +26,13 @@ import com.hyd.recyclerviewdemo.bean.ItemBean;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.widget.GridLayout.VERTICAL;
-import static android.widget.LinearLayout.HORIZONTAL;
-
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerView mList;
     private List<ItemBean> mData;
     private LinearLayoutManager layoutManager;
     private RecyclerViewBaseAdapter mAdapter;
+    private SwipeRefreshLayout mRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 4.找到控件
         mList = this.findViewById(R.id.recyclerview);
+        mRefreshLayout = findViewById(R.id.refresh_layout);
         // 5.准备数据
         initDate();
 
@@ -52,6 +52,41 @@ public class MainActivity extends AppCompatActivity {
 //        // 因此我们要自己创建一个监听条目点击的方法
 //        initListener();
 
+        // 98.处理下拉刷新
+        handlerDownPullUpdate();
+
+    }
+
+    private void handlerDownPullUpdate() {
+
+        // 102.设置刷新的颜色
+        mRefreshLayout.setColorSchemeResources(R.color.design_default_color_primary_variant);
+
+        mRefreshLayout.setEnabled(true);
+
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                // 99.执行刷新数据的操作
+                ItemBean data = new ItemBean();
+                data.title = "新增";
+                data.icon = R.mipmap.ic_launcher;
+                mData.add(0, data);
+
+                // 100.更新UI（模拟）
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        // 101.让刷新停止，更新列表
+                        mAdapter.notifyDataSetChanged();
+                        mRefreshLayout.setRefreshing(false);
+                    }
+                }, 2000);
+
+            }
+        });
     }
 
     private void initListener() {
