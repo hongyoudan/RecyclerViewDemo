@@ -11,9 +11,12 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+import android.widget.Toast;
 
 import com.hyd.recyclerviewdemo.adapter.GridViewAdapter;
 import com.hyd.recyclerviewdemo.adapter.ListViewAdapter;
+import com.hyd.recyclerviewdemo.adapter.RecyclerViewBaseAdapter;
 import com.hyd.recyclerviewdemo.adapter.StaggerAdapter;
 import com.hyd.recyclerviewdemo.bean.Datas;
 import com.hyd.recyclerviewdemo.bean.ItemBean;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView mList;
     private List<ItemBean> mData;
     private LinearLayoutManager layoutManager;
+    private RecyclerViewBaseAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,24 @@ public class MainActivity extends AppCompatActivity {
         // 29.设置默认显示的效果
         showList(true, false);
 
+        // 66.因为RecyclerView没有像ListView有item点击事件的方法，
+        // 因此我们要自己创建一个监听条目点击的方法
+        initListener();
+
+    }
+
+    private void initListener() {
+
+        // 67.因为条目在Adapter里，因此我们只需要设置Adapter属性即可
+        // 79.设置接口
+        mAdapter.setOnItemClickListener(new RecyclerViewBaseAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+
+                // 80.设置条目点击事件
+                Toast.makeText(MainActivity.this, "点击了" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     // 6.initDate方法用于初始化模拟数据
@@ -162,10 +184,12 @@ public class MainActivity extends AppCompatActivity {
 
         // 59.创建适配器 adapter.StaggerAdapter
         // 63.创建完成后回来
-        StaggerAdapter adapter = new StaggerAdapter(mData);
+        // 70.将adapter提取成全局变量，类型是父类RecyclerViewBaseAdapter
+        mAdapter = new StaggerAdapter(mData);
 
         // 64.设置适配器
-        mList.setAdapter(adapter);
+        mList.setAdapter(this.mAdapter);
+
     }
 
     // 37.同理，设置参数
@@ -181,8 +205,9 @@ public class MainActivity extends AppCompatActivity {
 
         // 38.设置适配器，创建adapter.GridViewAdapter，创建步骤与前面所讲一样
         // 39.创建完成后回来设置
-        GridViewAdapter adapter = new GridViewAdapter(mData);
-        mList.setAdapter(adapter);
+        // 69.将adapter提取成全局变量，类型是父类RecyclerViewBaseAdapter
+        mAdapter = new GridViewAdapter(mData);
+        mList.setAdapter(this.mAdapter);
 
     }
 
@@ -207,7 +232,9 @@ public class MainActivity extends AppCompatActivity {
         layoutManager.setReverseLayout(isReverse);
 
         mList.setLayoutManager(layoutManager);
-        ListViewAdapter adapter = new ListViewAdapter(mData);
-        mList.setAdapter(adapter);
+
+        // 68.将adapter提取成全局变量，类型是父类RecyclerViewBaseAdapter
+        mAdapter = new ListViewAdapter(mData);
+        mList.setAdapter(mAdapter);
     }
 }
