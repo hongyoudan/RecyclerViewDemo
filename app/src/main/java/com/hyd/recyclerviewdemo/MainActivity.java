@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.hyd.recyclerviewdemo.adapter.GridViewAdapter;
 import com.hyd.recyclerviewdemo.adapter.ListViewAdapter;
 import com.hyd.recyclerviewdemo.adapter.RecyclerViewBaseAdapter;
@@ -98,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(int position) {
 
                 // 80.设置条目点击事件
-                Toast.makeText(MainActivity.this, "点击了" + position, Toast.LENGTH_SHORT).show();
+                ToastUtils.showShort("点击了" + position);
             }
         });
     }
