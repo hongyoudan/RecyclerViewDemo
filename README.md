@@ -13,17 +13,17 @@
 
 ## 前言
 
-`RecyclerView`是`Android`一个强大的控件，其不仅可以实现和`ListView`同样的效果，还有优化了`ListView`中的各种不足。其可以实现数据纵向滚动，也可以实现横向滚动（ListView做不到横向滚动）。
+`RecyclerView` 是 `Android` 一个强大的控件，其不仅可以实现和 `ListView` 同样的效果，还有优化了`ListView`中的各种不足。其可以实现数据纵向滚动，也可以实现横向滚动（ListView做不到横向滚动）。
 
 **使用RecyclerView的标配:**
 
-- 导入RecyclerView依赖
+- 导入 RecyclerView 控件的依赖
 
 `implementation 'androidx.recyclerview:recyclerview:1.2.0-alpha05'`
 
 - 在布局文件里使用RecyclerView
 
-- 在MainActivity里通过findViewById找到控件
+- 在 MainActivity 里通过 findViewById 找到 RecyclerView 控件
 
 - 准备好数据
 
@@ -34,6 +34,22 @@
 - 设置适配器
 
 - 完成
+
+
+
+## 项目基本信息
+
+Desktop System：macOS
+
+IDE：Android Studio
+
+Android Gradle Plugin Version：4.2.1
+
+Gradle Version：6.7.1
+
+Compile Sdk Version：30
+
+Build Tools Version：30.0.3
 
 
 
